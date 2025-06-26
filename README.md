@@ -34,9 +34,5 @@ This example are using these libraries:
 
 I did test the PubSubClient MQTT-library, but could not get it to work with the display component...
 
-################
-<<<<<<< HEAD
 https://elkim.no/produkt/klokkedisplay-tft-display-1-28-inch-tft-lcd-display-module-round-rgb-240x240-gc9a01-driver-4-wire-spi-interface-240x240-pcb-for-arduino/
-=======
-https://elkim.no/produkt/klokkedisplay-tft-display-1-28-inch-tft-lcd-display-module-round-rgb-240x240-gc9a01-driver-4-wire-spi-interface-240x240-pcb-for-arduino/
->>>>>>> ebf5d98accd3994f0d874885a0aee1904ea1dea5
+
