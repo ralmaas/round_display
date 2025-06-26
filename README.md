@@ -1,7 +1,7 @@
 # Round_display
-<<<<<<< HEAD
+
 Test-code for the 1.28" round display
-=======
+
 Test-code for the 1.28" round display.
 Have been playing around with LVGL, network, MQTT and NTP....
 >>>>>>> ebf5d98accd3994f0d874885a0aee1904ea1dea5
@@ -10,9 +10,9 @@ Based on a GitHub by garagetinkering:
 	https://github.com/garagetinkering/1.28-inch-blank
 
 
-<<<<<<< HEAD
+
 This example have two screens
-=======
+
 This example have two screens:
 >>>>>>> ebf5d98accd3994f0d874885a0aee1904ea1dea5
 
