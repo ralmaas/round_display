@@ -155,9 +155,9 @@ bool isScreenDimmed = false;
  */
 PsychicMqttClient mqttClient;
 
-const char ssid[] = "...";
-const char pass[] = "...";
-const char mqtt_server[] = "mqtt://192.168.1.100";
+const char ssid[20] = WIFI_SSID;
+const char pass[20] = WIFI_PASSWORD;
+const char mqtt_server[] = "mqtt://192.168.2.200";
 String topic_kw = "han/kw";
 String topic_outside_temp = "esp/itroom/temperature";
 String topic_temperatures = "RPi/Temp/#";
@@ -168,7 +168,7 @@ String topic_temperatures = "RPi/Temp/#";
 
 String topic_timer = "ESP32/round/timer";
 String topic_status = "ESP32/round/status";
-String topic_dab = "ESP32/round/dab";
+String topic_dab = "DABradio/power";
 boolean timer_status = false; // Timer status
 boolean dab_status = false;
 
@@ -261,13 +261,13 @@ void dab_click_event(lv_event_t *e) {
   if (!dab_status)
   {
     Serial.println("DAB on");
-    mqttClient.publish(topic_dab.c_str(), 0, 0, "1"); // Publish DAB on message");
+    mqttClient.publish(topic_dab.c_str(), 0, 0, "on"); // Publish DAB on message");
     lv_style_set_bg_color(&dab_style_def, lv_color_make(0xff, 0xff, 0));
     lv_style_set_text_color(&dab_style_def, lv_color_make(0, 0, 0));
   }
   else{
     Serial.println("DAB Off");
-    mqttClient.publish(topic_dab.c_str(), 0, 0, "0"); // Publish DAB on message");
+    mqttClient.publish(topic_dab.c_str(), 0, 0, "off"); // Publish DAB on message");
     lv_style_set_bg_color(&dab_style_def, lv_color_make(0xff, 0, 0));
     lv_style_set_text_color(&dab_style_def, lv_color_make(0xff, 0xff, 0xff));
   }
@@ -315,7 +315,7 @@ void make_arc() {
   lv_obj_remove_style(power_arc, NULL, LV_PART_KNOB); 
   lv_obj_set_style_arc_color(power_arc, lv_palette_main(LV_PALETTE_GREY), LV_PART_MAIN);
   lv_obj_set_style_arc_color(power_arc, lv_palette_main(LV_PALETTE_YELLOW), LV_PART_INDICATOR);
-  lv_arc_set_range(power_arc, 0, 60);
+  lv_arc_set_range(power_arc, 0, 2000);
   lv_arc_set_value(power_arc, 0);
   lv_obj_align(power_arc, LV_ALIGN_CENTER, 0, 0);
 
@@ -513,9 +513,10 @@ void onMqttConnect(bool sessionPresent)
     int packetIdSub = mqttClient.subscribe(topic_kw.c_str(), 2);
     Serial.printf("Subscribing at QoS 2, packetId: %d [%s]\r\n", packetIdSub, topic_kw);
 
+    /*
     packetIdSub = mqttClient.subscribe(topic_outside_temp.c_str(), 2);
     Serial.printf("Subscribing at QoS 2, packetId: %d [%s]\r\n", packetIdSub, topic_outside_temp);
-
+    */
     
     packetIdSub = mqttClient.subscribe(topic_temperatures.c_str(), 2);
     Serial.printf("Subscribing at QoS 2, packetId: %d [%s]\r\n", packetIdSub, topic_temperatures);
@@ -551,16 +552,17 @@ void onMqttMessage(char *topic, char *payload, int retain, int qos, bool dup)
       lv_label_set_text(kw_label, buffer);
       lv_arc_set_value(power_arc, atof(payload)); // /100.0);
     }
+    /*
     else if (strcmp(topic, topic_outside_temp.c_str()) == 0)
     {
       sprintf(buffer, "IT: %.1f \u00B0C", atof(payload));
       lv_label_set_text(outside_label, buffer);
     }
-    else if (strcmp(topic, "RPi/Temp/rpivpn") == 0)
+    */
+    else if (strcmp(topic, "TEMP/outside") == 0)
     {
-      // RPi/Temp/rpivpn
-      sprintf(buffer, "VPN: %.1f \u00B0C", atof(payload));
-      lv_label_set_text(temp_vpn_label, buffer);
+      sprintf(buffer, "OUT: %.1f \u00B0C", atof(payload));
+      lv_label_set_text(outside_label, buffer);
     }
     else
     {
@@ -638,7 +640,7 @@ void setup()
     lv_timer_handler();
     yield();
   }
-  Serial.println("Connect to WLAN");
+  Serial.printf("Connect to WLAN: %s\r\n", ssid);
 
   // sleep(10);
   // Then the WiFi

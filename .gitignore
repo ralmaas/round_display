@@ -5,4 +5,5 @@
 .vscode/ipch
 .DS_Store
 prefs.txt
+/config/secret.ini
 **/convert.py

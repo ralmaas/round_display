@@ -1,12 +1,20 @@
 # Round_display
+<<<<<<< HEAD
+Test-code for the 1.28" round display
+=======
 Test-code for the 1.28" round display.
 Have been playing around with LVGL, network, MQTT and NTP....
+>>>>>>> ebf5d98accd3994f0d874885a0aee1904ea1dea5
 
 Based on a GitHub by garagetinkering:
 	https://github.com/garagetinkering/1.28-inch-blank
 
 
+<<<<<<< HEAD
+This example have two screens
+=======
 This example have two screens:
+>>>>>>> ebf5d98accd3994f0d874885a0aee1904ea1dea5
 
 Screen #1:
 	- ARC showing current power usage (kW)
@@ -31,4 +39,8 @@ This example are using these libraries:
 I did test the PubSubClient MQTT-library, but could not get it to work with the display component...
 
 ################
+<<<<<<< HEAD
 https://elkim.no/produkt/klokkedisplay-tft-display-1-28-inch-tft-lcd-display-module-round-rgb-240x240-gc9a01-driver-4-wire-spi-interface-240x240-pcb-for-arduino/
+=======
+https://elkim.no/produkt/klokkedisplay-tft-display-1-28-inch-tft-lcd-display-module-round-rgb-240x240-gc9a01-driver-4-wire-spi-interface-240x240-pcb-for-arduino/
+>>>>>>> ebf5d98accd3994f0d874885a0aee1904ea1dea5
