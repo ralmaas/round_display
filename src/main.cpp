@@ -8,7 +8,10 @@
 #include <time.h>
 #include <Preferences.h>
 #include "main.h"
-
+/*
+	2025-06-27/ralm
+		Moved WiFi credentials and MQTT-server to config/secret.ini
+	*/
 class LGFX : public lgfx::LGFX_Device
 {
   lgfx::Panel_GC9A01 _panel_instance;
@@ -155,12 +158,20 @@ bool isScreenDimmed = false;
  */
 PsychicMqttClient mqttClient;
 
+
 const char ssid[20] = WIFI_SSID;
 const char pass[20] = WIFI_PASSWORD;
-const char mqtt_server[] = "mqtt://192.168.2.200";
+const char mqtt_server[30] = MQTT_SERVER;
+/* */
 String topic_kw = "han/kw";
 String topic_outside_temp = "esp/itroom/temperature";
 String topic_temperatures = "RPi/Temp/#";
+/* */
+/* 
+  String topic_kw = "HAN/list1/actpwr14";
+  String topic_outside_temp = "TEMP/outside";
+  String topic_temperatures = "TEMP/#";
+*/
 
 /*
   * MQTT topics
@@ -315,7 +326,7 @@ void make_arc() {
   lv_obj_remove_style(power_arc, NULL, LV_PART_KNOB); 
   lv_obj_set_style_arc_color(power_arc, lv_palette_main(LV_PALETTE_GREY), LV_PART_MAIN);
   lv_obj_set_style_arc_color(power_arc, lv_palette_main(LV_PALETTE_YELLOW), LV_PART_INDICATOR);
-  lv_arc_set_range(power_arc, 0, 2000);
+  lv_arc_set_range(power_arc, 0, 60);
   lv_arc_set_value(power_arc, 0);
   lv_obj_align(power_arc, LV_ALIGN_CENTER, 0, 0);
 
@@ -552,17 +563,15 @@ void onMqttMessage(char *topic, char *payload, int retain, int qos, bool dup)
       lv_label_set_text(kw_label, buffer);
       lv_arc_set_value(power_arc, atof(payload)); // /100.0);
     }
-    /*
-    else if (strcmp(topic, topic_outside_temp.c_str()) == 0)
+    else if (strcmp(topic, "RPi/Temp/NKADisplayInt") == 0)
     {
-      sprintf(buffer, "IT: %.1f \u00B0C", atof(payload));
+      sprintf(buffer, "CPU#1: %.1f \u00B0C", atof(payload));
       lv_label_set_text(outside_label, buffer);
     }
-    */
-    else if (strcmp(topic, "TEMP/outside") == 0)
+    else if (strcmp(topic, "RPi/Temp/rpivpn") == 0)
     {
       sprintf(buffer, "OUT: %.1f \u00B0C", atof(payload));
-      lv_label_set_text(outside_label, buffer);
+      lv_label_set_text(temp_vpn_label, buffer);
     }
     else
     {
