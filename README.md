@@ -1,7 +1,4 @@
 # Round_display
-
-Test-code for the 1.28" round display
-
 Test-code for the 1.28" round display.
 Have been playing around with LVGL, network, MQTT and NTP....
 
@@ -32,7 +29,7 @@ Any touch outside the Timer button will enable screen #2
 	- Different temperatures...
 
 
-Th code is using these libraries:
+The program is using these libraries:
 
 	- lvgl/lvgl@^9.3.0
 	- lovyan03/LovyanGFX@^1.1.16
