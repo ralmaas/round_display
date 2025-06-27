@@ -9,13 +9,10 @@ Based on a GitHub by garagetinkering:
 	https://github.com/garagetinkering/1.28-inch-blank
 
 config/secret.ini:
-------------------
-; START
 [secret]
 wifi_ssid = YOUR_SSID
 wifi_password = YOUR_SSID_PASSWORD
 mqtt_server = mqtt://192.168.1.100
-; END
 
 This example have two screens
 
