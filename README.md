@@ -37,6 +37,8 @@ The program is using these libraries:
 	- elims/PsychicMqttClient@^0.2.3
 
 I did test the PubSubClient MQTT-library, but could not get it to work with the display component...
-PS: I ordered my displays from: https://www.ebay.com/itm/186142537539
+
+PS: I ordered my displays from: 
+` https://www.ebay.com/itm/186142537539
 https://elkim.no/produkt/klokkedisplay-tft-display-1-28-inch-tft-lcd-display-module-round-rgb-240x240-gc9a01-driver-4-wire-spi-interface-240x240-pcb-for-arduino/
 
